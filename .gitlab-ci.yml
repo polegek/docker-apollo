@@ -10,7 +10,7 @@ variables:
 
 test_adminservice:
   script:
-  - sudo docker build -f ./adminservice/Dockerfile -t ${ADMINSERVICE_URL}:${CI_COMMIT_REF_NAME}
+  - sudo docker build -f ./adminservice/Dockerfile -t ${ADMINSERVICE_URL}:${CI_COMMIT_REF_NAME} .
   - sudo docker push ${ADMINSERVICE_URL}:${CI_COMMIT_REF_NAME}
   when: always
   only:
@@ -22,7 +22,7 @@ test_adminservice:
 
 deploy_adminservice:
   script:
-  - sudo docker build -f ./adminservice/Dockerfile -t ${ADMINSERVICE_URL}:${CI_COMMIT_TAG} -t ${ADMINSERVICE_URL}:latest
+  - sudo docker build -f ./adminservice/Dockerfile -t ${ADMINSERVICE_URL}:${CI_COMMIT_TAG} -t ${ADMINSERVICE_URL}:latest .
   - sudo docker push ${ADMINSERVICE_URL}:${CI_COMMIT_TAG}
   - sudo docker push ${ADMINSERVICE_URL}:latest
   when: always
@@ -35,7 +35,7 @@ deploy_adminservice:
 
 test_configservice:
   script:
-  - sudo docker build -f ./configservice/Dockerfile -t ${CONFIGSERVICE_URL}:${CI_COMMIT_REF_NAME}
+  - sudo docker build -f ./configservice/Dockerfile -t ${CONFIGSERVICE_URL}:${CI_COMMIT_REF_NAME} .
   - sudo docker push ${CONFIGSERVICE_URL}:${CI_COMMIT_REF_NAME}
   when: always
   only:
@@ -47,7 +47,7 @@ test_configservice:
 
 deploy_configservice:
   script:
-  - sudo docker build -f ./configservice/Dockerfile -t ${CONFIGSERVICE_URL}:${CI_COMMIT_TAG} -t ${CONFIGSERVICE_URL}:latest
+  - sudo docker build -f ./configservice/Dockerfile -t ${CONFIGSERVICE_URL}:${CI_COMMIT_TAG} -t ${CONFIGSERVICE_URL}:latest .
   - sudo docker push ${CONFIGSERVICE_URL}:${CI_COMMIT_TAG}
   - sudo docker push ${CONFIGSERVICE_URL}:latest
   when: always
@@ -60,7 +60,7 @@ deploy_configservice:
 
 test_portal:
   script:
-  - sudo docker build -f ./portal/Dockerfile -t ${PORTAL_URL}:${CI_COMMIT_REF_NAME}
+  - sudo docker build -f ./portal/Dockerfile -t ${PORTAL_URL}:${CI_COMMIT_REF_NAME} .
   - sudo docker push ${PORTAL_URL}:${CI_COMMIT_REF_NAME}
   when: always
   only:
@@ -72,7 +72,7 @@ test_portal:
 
 deploy_portal:
   script:
-  - sudo docker build -f ./portal/Dockerfile -t ${PORTAL_URL}:${CI_COMMIT_TAG} -t ${PORTAL_URL}:latest
+  - sudo docker build -f ./portal/Dockerfile -t ${PORTAL_URL}:${CI_COMMIT_TAG} -t ${PORTAL_URL}:latest .
   - sudo docker push ${PORTAL_URL}:${CI_COMMIT_TAG}
   - sudo docker push ${PORTAL_URL}:latest
   when: always
