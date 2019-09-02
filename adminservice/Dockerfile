@@ -32,4 +32,4 @@ RUN unzip /apollo-adminservice/apollo-adminservice-${VERSION}-github.zip -d /apo
 
 EXPOSE $SERVER_PORT
 
-CMD ["/apollo-configservice/scripts/startup.sh"]
+CMD ["/apollo-adminservice/scripts/startup.sh"]
