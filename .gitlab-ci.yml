@@ -1,0 +1,84 @@
+include:
+- project: 'gekcore/ops/gitlab-ci'
+  ref: master
+  file: '/docker/.gitlab-ci.yml'
+
+variables:
+  ADMINSERVICE_URL: ""
+  CONFIGSERVICE_URL: ""
+  PORTAL_URL: "postgres://postgres@postgres/my_database"
+
+test_adminservice:
+  script:
+  - sudo docker build -f ./adminservice/Dockerfile -t ${ADMINSERVICE_URL}:${CI_COMMIT_REF_NAME}
+  - sudo docker push ${ADMINSERVICE_URL}:${CI_COMMIT_REF_NAME}
+  when: always
+  only:
+  - branches
+  allow_failure: false
+  stage: test
+  tags:
+  - docker
+
+deploy_adminservice:
+  script:
+  - sudo docker build -f ./adminservice/Dockerfile -t ${ADMINSERVICE_URL}:${CI_COMMIT_TAG} -t ${ADMINSERVICE_URL}:latest
+  - sudo docker push ${ADMINSERVICE_URL}:${CI_COMMIT_TAG}
+  - sudo docker push ${ADMINSERVICE_URL}:latest
+  when: always
+  only:
+  - tags
+  allow_failure: false
+  stage: deploy
+  tags:
+  - docker
+
+test_configservice:
+  script:
+  - sudo docker build -f ./configservice/Dockerfile -t ${CONFIGSERVICE_URL}:${CI_COMMIT_REF_NAME}
+  - sudo docker push ${CONFIGSERVICE_URL}:${CI_COMMIT_REF_NAME}
+  when: always
+  only:
+  - branches
+  allow_failure: false
+  stage: test
+  tags:
+  - docker
+
+deploy_configservice:
+  script:
+  - sudo docker build -f ./configservice/Dockerfile -t ${CONFIGSERVICE_URL}:${CI_COMMIT_TAG} -t ${CONFIGSERVICE_URL}:latest
+  - sudo docker push ${CONFIGSERVICE_URL}:${CI_COMMIT_TAG}
+  - sudo docker push ${CONFIGSERVICE_URL}:latest
+  when: always
+  only:
+  - tags
+  allow_failure: false
+  stage: deploy
+  tags:
+  - docker
+
+test_portal:
+  script:
+  - sudo docker build -f ./portal/Dockerfile -t ${PORTAL_URL}:${CI_COMMIT_REF_NAME}
+  - sudo docker push ${PORTAL_URL}:${CI_COMMIT_REF_NAME}
+  when: always
+  only:
+  - branches
+  allow_failure: false
+  stage: test
+  tags:
+  - docker
+
+deploy_portal:
+  script:
+  - sudo docker build -f ./portal/Dockerfile -t ${PORTAL_URL}:${CI_COMMIT_TAG} -t ${PORTAL_URL}:latest
+  - sudo docker push ${PORTAL_URL}:${CI_COMMIT_TAG}
+  - sudo docker push ${PORTAL_URL}:latest
+  when: always
+  only:
+  - tags
+  allow_failure: false
+  stage: deploy
+  tags:
+  - docker
