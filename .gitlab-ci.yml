@@ -4,9 +4,9 @@ include:
   file: '/docker/.gitlab-ci.yml'
 
 variables:
-  ADMINSERVICE_URL: ""
-  CONFIGSERVICE_URL: ""
-  PORTAL_URL: "postgres://postgres@postgres/my_database"
+  ADMINSERVICE_URL: "registry.cn-shanghai.aliyuncs.com/gekcore/apollo-adminservice"
+  CONFIGSERVICE_URL: "registry.cn-shanghai.aliyuncs.com/gekcore/apollo-configservice"
+  PORTAL_URL: "registry.cn-shanghai.aliyuncs.com/gekcore/apollo-portal"
 
 test_adminservice:
   script:
