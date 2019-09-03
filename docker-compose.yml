@@ -1,0 +1,58 @@
+version: '3'
+
+volumes:
+  apollo.log:
+
+services:
+  apollo-configservice:
+    image: polegek/apollo-configservice:1.4.0
+    container_name: apollo-configservice
+    restart: always
+    hostname: apollo-configservice
+    ports:
+    - "8080:8080"
+    environment:
+      spring_datasource_url: jdbc:mysql://mysql.address:3306/apolloconfigdb?characterEncoding=utf8
+      spring_datasource_username: username
+      spring_datasource_password: password
+    volumes: 
+    - apollo.log:/opt/logs
+
+  apollo-adminservice:
+    image: polegek/apollo-adminservice:1.4.0
+    container_name: apollo-adminservice
+    restart: always
+    depends_on:
+    - apollo-configservice
+    hostname: apollo-adminservice
+    ports:
+    - "8090:8090"
+    environment:
+      spring_datasource_url: jdbc:mysql://mysql.address:3306/ApolloConfigDB?characterEncoding=utf8
+      spring_datasource_username: username
+      spring_datasource_password: password
+    volumes: 
+    - apollo.log:/opt/logs
+
+  apollo-portal:
+    image: polegek/apollo-portal:1.4.0
+    container_name: apollo-portal
+    restart: always
+    depends_on:
+    - apollo-adminservice
+    hostname: apollo-portal
+    ports:
+    - "8070:8070"
+    environment:
+      spring_datasource_url: jdbc:mysql://mysql.address:3306/ApolloPortalDB?characterEncoding=utf8
+      spring_datasource_username: username
+      spring_datasource_password: password
+      LOCAL_META: "http://apollo-configservice:8080"
+      DEV_META: ""
+      FAT_META: ""
+      UAT_META: ""
+      LPT_META: ""
+      PRO_META: ""
+    volumes: 
+    - apollo.log:/opt/logs
+
