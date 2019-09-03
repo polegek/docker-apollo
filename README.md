@@ -13,7 +13,7 @@ Sql file: [ctripcorp/apollo/V1.0.0__initialization.sql](https://github.com/ctrip
 - Step3: update ApolloConfigDB data<br/>
 Because of using docker, we should change `eureka.service.url`
 ```sql
-update `ApolloConfigDB`.`ServerConfig` set `Value` = 'http://apollo-config:8080/eureka/' where `Key` = 'eureka.service.url'
+update `ApolloConfigDB`.`ServerConfig` set `Value` = 'http://apollo-configservice:8080/eureka/' where `Key` = 'eureka.service.url'
 ```
 
 - Step4: update ApolloPortalDB data<br/>
