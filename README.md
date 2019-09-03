@@ -5,10 +5,10 @@ This project provide a `docker-compose.yml` file. This is a template for referen
 Before you start the application. You should config database first.
 
 - Step1: config `ApolloConfigDB`<br/>
-Sql file: [ctripcorp/apollo](https://github.com/ctripcorp/apollo/blob/master/scripts/db/migration/configdb/V1.0.0__initialization.sql)
+Sql file: [ctripcorp/apollo/V1.0.0__initialization.sql](https://github.com/ctripcorp/apollo/blob/master/scripts/db/migration/configdb/V1.0.0__initialization.sql)
 
 - Step2: config `ApolloPortalDB`<br/>
-Sql file: [ctripcorp/apollo](https://github.com/ctripcorp/apollo/blob/master/scripts/db/migration/portaldb/V1.0.0__initialization.sql)
+Sql file: [ctripcorp/apollo/V1.0.0__initialization.sql](https://github.com/ctripcorp/apollo/blob/master/scripts/db/migration/portaldb/V1.0.0__initialization.sql)
 
 - Step3: update ApolloConfigDB data<br/>
 Because of using docker, we should change `eureka.service.url`
