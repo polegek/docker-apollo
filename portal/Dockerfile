@@ -7,7 +7,7 @@ FROM openjdk:8-jre-alpine
 
 LABEL maintainer="Polegek Feng <polegek@gekcore.com>"
 
-ENV VERSION 1.4.0
+ENV VERSION 1.5.1
 ENV SERVER_PORT 8070
 # DataSource Info 
 ENV DS_URL ""
